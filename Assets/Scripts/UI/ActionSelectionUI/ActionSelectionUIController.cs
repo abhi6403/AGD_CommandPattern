@@ -1,6 +1,7 @@
 using Command.Actions;
 using Command.Main;
 using System.Collections.Generic;
+using Command.Commands;
 
 namespace Command.UI
 {
@@ -23,7 +24,7 @@ namespace Command.UI
             Hide();
         }
 
-        public void Show(List<ActionType> executableCommands)
+        public void Show(List<CommandType> executableCommands)
         {
             ResetActionButtons();
             actionSelectionView.EnableView();
@@ -42,9 +43,9 @@ namespace Command.UI
             actionButtons.Clear();
         }
 
-        private void CreateActionButtons(List<ActionType> executableCommands)
+        private void CreateActionButtons(List<CommandType> executableCommands)
         {
-            foreach(ActionType commandType in executableCommands)
+            foreach(CommandType commandType in executableCommands)
             {
                 var button = actionSelectionView.AddButton(actionButtonPrefab);
                 button.SetOwner(this);
@@ -54,9 +55,9 @@ namespace Command.UI
         }
 
         // To Learn more about Events and Observer Pattern, check out the course list here: https://outscal.com/courses
-        public void OnActionSelected(ActionType actionType)
+        public void OnActionSelected(CommandType commandType)
         {
-            GameService.Instance.EventService.OnActionSelected.InvokeEvent(actionType);
+            GameService.Instance.EventService.OnActionSelected.InvokeEvent(commandType);
             Hide();
         }
 

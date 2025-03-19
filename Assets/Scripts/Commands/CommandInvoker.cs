@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Commands
+namespace Command.Commands
 {
     public class CommandInvoker
     {

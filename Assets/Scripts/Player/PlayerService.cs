@@ -1,4 +1,5 @@
 using Command.Actions;
+using Command.Commands;
 using Command.Main;
 
 namespace Command.Player
@@ -65,7 +66,7 @@ namespace Command.Player
 
         public void OnPlayerTurnCompleted() => StartNextTurn();
 
-        public void PerformAction(ActionType actionSelected, UnitController targetUnit) => GameService.Instance.ActionService.GetActionByType(actionSelected).PerformAction(activePlayer.GetUnitByID(ActiveUnitID), targetUnit);
+        public void PerformAction(CommandType commandSelected, UnitController targetUnit) => GameService.Instance.ActionService.GetActionByType(commandSelected).PerformAction(activePlayer.GetUnitByID(ActiveUnitID), targetUnit);
 
         public void PlayerDied(PlayerController deadPlayer)
         {

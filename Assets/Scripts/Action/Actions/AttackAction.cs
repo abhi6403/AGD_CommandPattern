@@ -1,3 +1,4 @@
+using Command.Commands;
 using Command.Input;
 using Command.Main;
 using Command.Player;
@@ -9,27 +10,27 @@ namespace Command.Actions
     {
         private UnitController actorUnit;
         private UnitController targetUnit;
+        private bool isSuccessfull;
         public TargetType TargetType => TargetType.Enemy;
 
-        public void PerformAction(UnitController actorUnit, UnitController targetUnit)
+        public void PerformAction(UnitController actorUnit, UnitController targetUnit,bool isSuccessfull)
         {
             this.actorUnit = actorUnit;
             this.targetUnit = targetUnit;
-
-            actorUnit.PlayBattleAnimation(ActionType.Attack, CalculateMovePosition(targetUnit), OnActionAnimationCompleted);
+            this.isSuccessfull = isSuccessfull;
+            
+            actorUnit.PlayBattleAnimation(CommandType.Attack, CalculateMovePosition(targetUnit), OnActionAnimationCompleted);
         }
 
         public void OnActionAnimationCompleted() 
         {
             PlayAttackSound();
 
-            if (IsSuccessful())
+            if (isSuccessfull)
                 targetUnit.TakeDamage(actorUnit.CurrentPower);
             else
                 GameService.Instance.UIService.ActionMissed();
         }
-
-        public bool IsSuccessful() => true;
 
         public Vector3 CalculateMovePosition(UnitController targetUnit) => targetUnit.GetEnemyPosition();
 
