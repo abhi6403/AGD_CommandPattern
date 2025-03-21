@@ -9,6 +9,7 @@ using Command.Events;
 using Command.Battle;
 using Command.Actions;
 using Command.Commands;
+using Commands.Replay;
 using UnityEngine.UI;
 
 namespace Command.Main

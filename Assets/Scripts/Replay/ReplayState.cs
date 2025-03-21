@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public enum ReplayState
+namespace Commands.Replay
 {
-    DEACTIVE,
-    INACTIVE,
+    public enum ReplayState
+    {
+        DEACTIVE,
+        ACTIVE,
+    }
 }

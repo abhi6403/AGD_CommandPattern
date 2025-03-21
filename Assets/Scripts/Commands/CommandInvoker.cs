@@ -7,6 +7,15 @@ namespace Command.Commands
     {
         private Stack<ICommand> commandRegistry = new Stack<ICommand>();
 
+        public CommandInvoker() => SubscribeToEvents();
+
+        private void SubscribeToEvents() => GameService.Instance.EventService.OnReplayButtonClicked.AddListener(SetReplayStack);
+       
+        public void SetReplayStack()
+        {
+            GameService.Instance.ReplayService.SetCommandStack(commandRegistry);
+            commandRegistry.Clear();
+        }
         public void ProcessCommand(ICommand commandToProcess)
         {
             ExecuteCommand(commandToProcess);

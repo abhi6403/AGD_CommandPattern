@@ -12,6 +12,12 @@ namespace Command.UI
             this.battleEndView = battleEndView;
             battleEndView.SetController(this);
         }
+        public void OnReplayButtonClicked()
+        {
+            GameService.Instance.ReplayService.SetReplayState(global::Commands.Replay.ReplayState.ACTIVE);
+            GameService.Instance.InputService.SetInputState(Input.InputState.INACTIVE);
+            GameService.Instance.EventService.OnReplayButtonClicked.InvokeEvent();
+        }
 
         public void Show() => battleEndView.EnableView();
 

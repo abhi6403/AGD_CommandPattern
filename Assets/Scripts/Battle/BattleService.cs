@@ -16,9 +16,13 @@ namespace Command.Battle
             SubscribeToEvents();
         }
 
-        private void SubscribeToEvents() => GameService.Instance.EventService.OnBattleSelected.AddListener(LoadBattle);
+        private void SubscribeToEvents()
+        {
+            GameService.Instance.EventService.OnBattleSelected.AddListener(LoadBattle);
+            GameService.Instance.EventService.OnReplayButtonClicked.AddListener(ReplayBattle);
+        }
 
-        private void LoadBattle(int battleId)
+    private void LoadBattle(int battleId)
         {
             currentBattleId = battleId;
             var battleDataToLoad = GetBattleDataByID(battleId);
@@ -29,5 +33,6 @@ namespace Command.Battle
         }
 
         private BattleScriptableObject GetBattleDataByID(int battleId) => battleScriptableObjects.Find(battleSO => battleSO.BattleID == battleId);
+        private void ReplayBattle() => LoadBattle(currentBattleId);
     }
 }
